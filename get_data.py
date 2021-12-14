@@ -8,10 +8,10 @@ def load_obj(name ):
     with open('obj/' + name + '.pkl', 'rb') as f:
         return pickle.load(f)
 
-ds = tfds.load('gigaword',split="train")
+ds = tfds.load('reddit',split="train")
 d = ds.take(12000)
 
-path = 'gigaword_data/'
+path = 'reddit_data/'
 # f_train = open(path + "train" + ".csv", "w")
 # f_test = open(path + "test" + ".csv", "w")
 # f_val = open(path + "val" + ".csv", "w")
@@ -24,8 +24,12 @@ val_data = []
 for count, text in enumerate(d):
     if count % 100 == 0:
         print(count)
-    article = text['document'].numpy().decode('utf-8')
+    article = text['content'].numpy().decode('utf-8')
+    article = str(article)
+    article = article.replace("\n", " ")
     target = text['summary'].numpy().decode('utf-8')
+    target = str(target)
+    target = target.replace("\n", " ")
     if count < 10000:
         train_data.append({"article": article, "summary": target})
         # f_train.write(article + "\t" + target + "\n")
@@ -36,9 +40,9 @@ for count, text in enumerate(d):
         val_data.append({"article": article, "summary": target})
         # f_val.write(article + "\t" + target + "\n")
 
-save_obj(train_data, "gigaword_train")
-save_obj(test_data, "gigaword_test")
-save_obj(val_data, "gigaword_val")
+save_obj(train_data, "reddit_train")
+save_obj(test_data, "reddit_test")
+save_obj(val_data, "reddit_val")
 # f_train.close()
 # f_test.close()
 # f_val.close()

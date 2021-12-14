@@ -42,7 +42,10 @@ if __name__ == "__main__":
         if count / 100 == 0:
             print(count)
         article = text["article"]
+        # print(article)
         summary = text["summary"]
+        # print(summary)
+        # break
 
         f_src.write(article + "\n")
         f_src_tok.write(article + "\n")
