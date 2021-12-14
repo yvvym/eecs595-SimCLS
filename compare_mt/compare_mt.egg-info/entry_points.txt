@@ -1,0 +1,4 @@
+[console_scripts]
+compare-ll = compare_mt.compare_ll_main:main
+compare-mt = compare_mt.compare_mt_main:main
+
